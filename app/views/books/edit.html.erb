@@ -1,0 +1,25 @@
+<body>
+<h1>Editing Book</h1>
+<p id="notice">
+     <%= notice %>
+  </p>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: @book, url: update_book_path(@book.id), method: :patch do |f| %>
+<p>本のタイトル</p>
+<%= f.text_field :title %>
+<p>感想</p>
+<%= f.text_area :body %>
+<div>
+  <%= f.submit 'Update Book' %>
+</div>
+<%= link_to 'Show', book_path(@book.id) %>
+<%= link_to 'Back', '/books'%>
+<% end %>
+</body>

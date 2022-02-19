@@ -1,0 +1,56 @@
+<body>
+<div class="container mt-5">
+<div class="row">
+  <div class="col-md-3">
+<div>
+  <h2>User info</h2>
+  <%= image_tag current_user.get_profile_image(63,63) %>
+
+  <p><%= current_user.name %></p>
+  <p>自己紹介文</p>
+  <p><%= current_user.introduction%></p>
+   
+   <%= link_to edit_user_path(current_user.id) do%>
+   <i class="fas fa-user-cog"></i>
+   <% end %>
+</div>
+<div>
+  <h2>New book</h2>
+  <%= form_with model: @new_book, local:true do |f| %>
+    <label>本のタイトル</label>
+    <div>
+      <%= f.text_field :title %>
+    </div>
+  </div>
+  <div>
+      <label>感想</label>
+      <div>
+        <%= f.text_area :body %>
+      </div>
+  </div>
+    <div><%= f.submit 'Create Book' %></div>
+  <% end %>
+  </div>
+<div class="col-md-8 offset-md-1">
+  <h2>Users</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>名前</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |users| %>
+      <tr>
+        <td><%= image_tag users.get_profile_image(40,40) %></td>
+        <td><p><%= users.name %></p></td>
+        <td><%= link_to 'Show', user_path(users.id)  %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  </body>
